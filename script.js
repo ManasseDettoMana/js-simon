@@ -1,33 +1,50 @@
 let vettoreNumeri = [];
 
 for(let i = 0; i<5; i++){
-    vettoreNumeri.push(NumeriRandom(1,100));
+    vettoreNumeri.push(NumeriRandom(1,100));  //scelta numeri random
 }
 console.log(vettoreNumeri);
 
 
 alert(vettoreNumeri);
 
-setTimeout(verificaNumeri, 3000, vettoreNumeri);
+setTimeout(verificaNumeri, 30000, vettoreNumeri);
 
 
 
-function verificaNumeri(vettoreNumeri){
+let i=1;
+var clock= setInterval(function(){   //stampa a video del timer
+    document.getElementById("timer").textContent = i;
+    i++;
+    if(i>30){
+        clearInterval(clock);
+    }
     
-    let numeriSbagliati=[];
+}, 999);
+
+
+
+function verificaNumeri(vettoreNumeri){     //verifica dei numeri
+    
+    let numeriIndovinati=[];
 
     for(let i = 0; i<vettoreNumeri.length;i++){
         let app=parseInt(prompt("Inserisci uno dei numeri"));
 
-        if(isNaN(app)){
+        if(isNaN(app)){     //in caso non fosse un numero quello inserito si torna indietro con l'iterazione e si ripete
             i--;
             continue;
         }
-        if(!vettoreNumeri.includes(app)){
-            numeriSbagliati.push(app);
+        if(vettoreNumeri.includes(app)){      //se il numero inserito si trova tra i numeri randomici 
+            numeriIndovinati.push(app);       //lo si inserisce nel vettore dei numeri indovinati
         }
     }
-    console.log(numeriSbagliati);
+
+    if(numeriIndovinati.length>0){            //inserimento nell'html dei numeri indovinati
+        document.getElementById("numeri_sbagliati").innerHTML += '<h2> Numeri indovinati: </h2>';
+        document.getElementById("numeri_sbagliati").innerHTML += '<span>' + numeriIndovinati + '</span>';
+    }
+    console.log(numeriIndovinati);
 }
 
 function NumeriRandom(min, max){
