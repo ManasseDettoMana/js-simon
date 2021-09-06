@@ -1,7 +1,10 @@
 let vettoreNumeri = [];
 
-for(let i = 0; i<5; i++){
-    vettoreNumeri.push(NumeriRandom(1,100));  //scelta numeri random
+while(vettoreNumeri.length < 5){
+    let app=NumeriRandom(1,100);
+    if(!vettoreNumeri.includes(app)){
+        vettoreNumeri.push(app);
+    }
 }
 console.log(vettoreNumeri);
 
